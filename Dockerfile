@@ -1,5 +1,11 @@
-FROM stijl/expo-io:latest AS test
+FROM stijl/expo-io:latest
+
+WORKDIR /usr/script
+
+COPY script.sh .
+
+RUN chmod +x script.sh
 
 WORKDIR /usr/src/app
 
-CMD ["npm", "install", "&&", "npm", "run", "test"]
+CMD ["/usr/script/script.sh"]
