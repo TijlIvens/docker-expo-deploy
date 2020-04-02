@@ -1,9 +1,15 @@
 FROM stijl/expo-io:latest
 
-WORKDIR /usr/src/app
+WORKDIR /usr/script
+
+COPY script.sh .
+
+RUN chmod +x script.sh
 
 ENV EXPO_USERNAME=
 ENV EXPO_PASSWORD=
 ENV SLUGNAME=
 
-CMD ["npm", "install", "&&", "apk", "add", "--no-cache", "bash", "&&", "expo", "login", "-u", "${EXPO_USERNAME}", "-p", "${EXPO_PASSWORD}", "&&", "SLUGNAME=${SLUGNAME}", "expo", "publish", "--non-interactive"]
+WORKDIR /usr/src/app
+
+CMD ["/usr/script/script.sh"]
